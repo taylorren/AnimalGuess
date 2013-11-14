@@ -6,7 +6,7 @@
     <body>
         <h1>Guess Animal (legacy) program</h1>
 
-        <p>Guess Animal is a legacy program I encountered when I started to learn C/C++.</p>
+        <p>Guess Animal is a legacy program I encountered when I started to learn programming with BASIC on my Apple II.</p>
 
         <p>The game is trying to mimic an AI by asking various questions about an animal that you (the user) have in mind. For every question, you will anwer Yes or No. The game will try to guess which animal you have in mind (as long as you are an honest human being and don't change your animal from question to question). If its guess is correct, it will be happy; if wrong, the program will prompt you to provide a Y/N question to distinguish the animal it guessed and the animal you have in mind.</p>
 
