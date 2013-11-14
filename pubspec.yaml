@@ -1,0 +1,7 @@
+name: AnimalGuess
+description: A sample Polymer application
+dependencies:
+    polymer: any
+transformers:
+- polymer:
+    entry_points: web/animalguess.html

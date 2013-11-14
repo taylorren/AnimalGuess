@@ -1,0 +1,67 @@
+<polymer-element name="animal-guess"> <template>
+
+<div class="container">
+  <template if="{{!gameinprogress}}">
+  <h3>Let's get started!</h3>
+  <button on-click="{{newGame}}">Click me</button>
+  </template>
+
+  <template if="{{gameinprogress}}">
+  <h3>Game in progress...</h3>
+  </template>
+
+  <template if="{{gameinprogress}}">
+  <div class="row">
+    <div class="col-md-6">{{qid}}. {{question}}</div>
+    <template if="{{!reachedend}}">
+    <div class="col-md-6">
+      <a href="#" on-click="{{YBranch}}">Yes</a>&nbsp;&nbsp;<a href="#"
+        on-click="{{NBranch}}">No</a>
+    </div>
+    </template>
+  </div>
+  </template>
+  <template if="{{win}}">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h3>I win! Congratulate me!</h3>
+    </div>
+  </div>
+  </template>
+  <template if="{{lost}}">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h3>You got me! Please help me to improve my knowledge.</h3>
+      <hr>
+      <form class="form-inline" role="form">
+        <div class="form-group">
+          <label for="youranimal">What animal do you have in
+            mind?</label> <input type="text" class="form-control"
+            id="youranimal" value="{{youranimal}}">
+          <p>
+            (and my guess is <em><strong>{{myanimal}}</strong></em>)
+          </p>
+          <label for="newquestion">And tell me a Y/N question to
+            distinguish these two animals:</label> <input type="text"
+            class="form-control" id="newquestion" value="{{newquestion}}"> <label>And
+            for <em>{{myanimal}}</em>, the answer is:
+          </label>
+          <input type="text" class="form-control" id="mybranch" value="{{mybranch}}">
+          <br>
+          <a href="#" on-click="{{submitForm}}" class="btn btn-default">Create a new branch</a>
+        </div>
+      </form>
+      <template if="{{wronganswer}}">
+      <p class="wrong">Wrong input for the answer. Expecting Y/N, or Yes/No (case insensitive).</p>
+      </template>
+      <template if="{{wrongquestion}}">
+      <p class="wrong">Due to some funny reason, "?" is not allowed at the end of the question.</p>
+      </template>
+      
+
+    </div>
+  </div>
+  </template>
+</div>
+</template> <script type="application/dart" src="animalguessclass.dart"></script> </polymer-element>
+
