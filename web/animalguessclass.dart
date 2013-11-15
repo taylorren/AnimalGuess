@@ -41,7 +41,7 @@ class AnimalGuess extends PolymerElement {
   
   void getQuestionById(qid)
   {
-    var path='http://rsywx/app_dev.php/animal/getQuestionById/$qid';
+    var path='http://animal/get.php?id=$qid';
     var req=new HttpRequest();
     req..open('GET', path)
       ..onLoadEnd.listen((e)=>requestComplete(req))
@@ -84,8 +84,8 @@ class AnimalGuess extends PolymerElement {
     {
       Map res=JSON.decode(req.responseText);
       myguess=res['q'];
-      yBranch=res['y'];
-      nBranch=res['n'];
+      yBranch=int.parse(res['y']);
+      nBranch=int.parse(res['n']);
       
       if (yBranch==-1 && nBranch==-1) // No more branches and we have reached the "guess"
       {

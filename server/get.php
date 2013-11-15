@@ -2,11 +2,18 @@
 
 require_once 'pdo.php';
 
-$res=$cn->query('select count(id) from animal');
+$id=$_GET['id'];
+
+$res=$cn->prepare('select * from animal where id = :id');
+$res->bindParam(':id', $id);
+$res->execute();
+        
 $r=$res->fetch();
 
 $ret=array();
-$ret['mid']=$r[0];
+$ret['q']=$r[1];
+$ret['y']=$r[2];
+$ret['n']=$r[3];
 
 setExtraHeader();
 
