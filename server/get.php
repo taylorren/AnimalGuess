@@ -2,7 +2,10 @@
 
 require_once 'pdo.php';
 
-$id=$_GET['id'];
+$id=filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+if(!$id)
+    $id=1;
 
 $res=$cn->prepare('select * from animal where id = :id');
 $res->bindParam(':id', $id);

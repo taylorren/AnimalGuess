@@ -22,7 +22,6 @@ class AnimalGuess extends PolymerElement {
   @published String youranimal='';
   @published String newquestion='';
   @published bool wronganswer=false;
-  @published bool wrongquestion=false;
 
   AnimalGuess.created() : super.created() {
     // The below 2 lines make sure the Bootstrap CSS will be applied
@@ -101,7 +100,7 @@ class AnimalGuess extends PolymerElement {
   void submitForm(Event e)
   {
     var path;
-    if(newquestion.endsWith('?'))
+    /*if(newquestion.endsWith('?'))
     {
       wrongquestion=true;
       return;
@@ -110,16 +109,16 @@ class AnimalGuess extends PolymerElement {
     {
       wrongquestion=false;
     }
-    
+    */
     if(mybranch.toLowerCase()=='y'||mybranch.toLowerCase()=='yes') // Y to my guessed animal, N to the animal in player's mind
     {
       wronganswer=false;
-      path='http://rsywx/app_dev.php/animal/setNewQuestion/$qid/$newquestion/$myanimal/$youranimal';
+      path='http://animal/set.php?id=$qid&q=$newquestion&animal1=$myanimal&animal2=$youranimal';
     }
     else if (mybranch.toLowerCase()=='n'||mybranch.toLowerCase()=='no')
     {
       wronganswer=false;
-      path='http://rsywx/app_dev.php/animal/setNewQuestion/$qid/$newquestion/$youranimal/$myanimal';
+      path='http://animal/set.php?id=$qid&q=$newquestion&animal1=$youranimal&animail2=$myanimal';
     }
     else // Not recognized answer
     {
@@ -127,7 +126,7 @@ class AnimalGuess extends PolymerElement {
       return;
     }
     
-    if(!wronganswer && !wrongquestion)
+    if(!wronganswer)
     {
       var req=new HttpRequest();
       req..open('GET', path)
@@ -140,7 +139,6 @@ class AnimalGuess extends PolymerElement {
   void newQuestionComplete(req)
   {
     wronganswer=false;
-    wrongquestion=false;
     newGame();
   }
 }
