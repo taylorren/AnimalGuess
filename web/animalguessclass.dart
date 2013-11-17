@@ -118,7 +118,7 @@ class AnimalGuess extends PolymerElement {
     else if (mybranch.toLowerCase()=='n'||mybranch.toLowerCase()=='no')
     {
       wronganswer=false;
-      path='http://animal/set.php?id=$qid&q=$newquestion&animal1=$youranimal&animail2=$myanimal';
+      path='http://animal/set.php?id=$qid&q=$newquestion&animal1=$youranimal&animal2=$myanimal';
     }
     else // Not recognized answer
     {
