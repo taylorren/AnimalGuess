@@ -4,10 +4,11 @@ import 'dart:convert';
 
 
 /**
- * A Polymer click counter element.
+ * A legacy animal guess game revitalized with Dart, Polymer as its frontend
  */
 @CustomTag('animal-guess')
 class AnimalGuess extends PolymerElement {
+  
   @published bool gameinprogress=false;
   @published String question='';
   @published String myguess='';
