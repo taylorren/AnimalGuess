@@ -13,8 +13,6 @@ class AnimalGuess extends PolymerElement {
   @published String question='';
   @published String myguess='';
   @published int qid=1;
-  int yBranch;
-  int nBranch;
   @published bool win=false;
   @published bool lost=false;
   @published bool reachedend=false;
@@ -23,30 +21,21 @@ class AnimalGuess extends PolymerElement {
   @published String youranimal='';
   @published String newquestion='';
   @published bool wronganswer=false;
+  
+  int yBranch;
+  int nBranch;
+  
 
   AnimalGuess.created() : super.created() {
     // The below 2 lines make sure the Bootstrap CSS will be applied
     var root = getShadowRoot("animal-guess");
     root.applyAuthorStyles = true;
   }
-
-  void newGame() {
-    gameinprogress=true;
-    win=false;
-    lost=false;
-    reachedend=false;
-    qid=1;
-    getQuestionById(qid);
-  }
   
-  void getQuestionById(qid)
+  void getQuestionById(questionid)
   {
-    var path='http://www.rsywx.net/animal/getQuestionById/$qid';
-    /*var req=new HttpRequest();
-    req..open('GET', path)
-      ..onLoadEnd.listen((e)=>requestComplete(req))
-      ..send('');
-   */
+    var path='http://www.rsywx.net/animal/getQuestionById/$questionid';
+
     HttpRequest.getString(path)
     .then((String res)
         {
@@ -99,22 +88,12 @@ class AnimalGuess extends PolymerElement {
       {
         question=myguess;
       }
-    }
   }
   
   void submitForm(Event e)
   {
-    var path;
-    /*if(newquestion.endsWith('?'))
-    {
-      wrongquestion=true;
-      return;
-    }
-    else
-    {
-      wrongquestion=false;
-    }
-    */
+    String path='';
+
     if(mybranch.toLowerCase()=='y'||mybranch.toLowerCase()=='yes') // Y to my guessed animal, N to the animal in player's mind
     {
       wronganswer=false;
@@ -133,21 +112,28 @@ class AnimalGuess extends PolymerElement {
     
     if(!wronganswer)
     {
-      var req=new HttpRequest();
-      req..open('GET', path)
-        ..onLoadEnd.listen((e)=>newQuestionComplete(req))
-          ..send('');
+      HttpRequest.getString(path)
+        .then((e)=>newQuestionComplete());
     }
     return;
   }
+
+  void newGame() {
+      gameinprogress=true;
+      win=false;
+      lost=false;
+      reachedend=false;
+      qid=1;
+      getQuestionById(qid);
+  }
   
-  void newQuestionComplete(req)
+  void newQuestionComplete()
   {
     wronganswer=false;
     newGame();
   }
+  
 }
-
 
 
 
