@@ -41,11 +41,17 @@ class AnimalGuess extends PolymerElement {
   
   void getQuestionById(qid)
   {
-    var path='http://animal/get.php?id=$qid';
-    var req=new HttpRequest();
+    var path='http://www.rsywx.net/animal/getQuestionById/$qid';
+    /*var req=new HttpRequest();
     req..open('GET', path)
       ..onLoadEnd.listen((e)=>requestComplete(req))
       ..send('');
+   */
+    HttpRequest.getString(path)
+    .then((String res)
+        {
+          requestComplete(res);
+        });
   }
   
   void YBranch()
@@ -78,14 +84,12 @@ class AnimalGuess extends PolymerElement {
     }
   }
   
-  void requestComplete(HttpRequest req)
+  void requestComplete(String req)
   {
-    if (req.status==200)
-    {
-      Map res=JSON.decode(req.responseText);
+      Map res=JSON.decode(req);
       myguess=res['q'];
-      yBranch=int.parse(res['y']);
-      nBranch=int.parse(res['n']);
+      yBranch=res['y'];
+      nBranch=res['n'];
       
       if (yBranch==-1 && nBranch==-1) // No more branches and we have reached the "guess"
       {
@@ -114,12 +118,12 @@ class AnimalGuess extends PolymerElement {
     if(mybranch.toLowerCase()=='y'||mybranch.toLowerCase()=='yes') // Y to my guessed animal, N to the animal in player's mind
     {
       wronganswer=false;
-      path='http://animal/set.php?id=$qid&q=$newquestion&animal1=$myanimal&animal2=$youranimal';
+      path='http://www.rsywx.net/animal/setNewQuestion/$qid/$newquestion/$myanimal/$youranimal';
     }
     else if (mybranch.toLowerCase()=='n'||mybranch.toLowerCase()=='no')
     {
       wronganswer=false;
-      path='http://animal/set.php?id=$qid&q=$newquestion&animal1=$youranimal&animal2=$myanimal';
+      path='http://www.rsywx.net/animal/setNewQuestion/$qid/$newquestion/$youranimal/$myanimal';
     }
     else // Not recognized answer
     {
